@@ -6,9 +6,22 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">#80000000</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="bottomSheetDialogTheme">@style/BottomSheetDialogTheme</item>
     </style>
 
     <style name="BaseDayNightTheme" parent="BaseAppTheme" />
 
     <style name="AppTheme" parent="BaseDayNightTheme" />
+
+    <style name="BaseBottomSheetDialogTheme" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">#80000000</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="BaseBottomSheetDialogTheme" />
 </resources>

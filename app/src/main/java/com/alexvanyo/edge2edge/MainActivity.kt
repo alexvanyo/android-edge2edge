@@ -116,6 +116,10 @@ class MainActivity : AppCompatActivity() {
             updateResults(text.toString())
         }
 
+        binding.fab.setOnClickListener {
+            MainBottomSheetDialogFragment().show(supportFragmentManager, null)
+        }
+
         updateResults(binding.searchBox.text.toString())
     }
 
