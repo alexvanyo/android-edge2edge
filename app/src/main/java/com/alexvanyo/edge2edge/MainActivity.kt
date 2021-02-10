@@ -11,6 +11,7 @@ import androidx.core.view.WindowInsetsCompat.Type.ime
 import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMargins
 import androidx.core.view.updatePadding
 import androidx.core.widget.doOnTextChanged
 import com.alexvanyo.edge2edge.databinding.ActivityMainBinding
@@ -42,7 +43,11 @@ class MainActivity : AppCompatActivity() {
 
         // Add the top system bars as padding to the toolbar
         binding.toolbar.doOnApplyWindowInsets { insetView, windowInsets, initialPadding, _ ->
-            insetView.updatePadding(top = initialPadding.top + windowInsets.getInsets(systemBars()).top)
+            insetView.updatePadding(
+                left = initialPadding.left + windowInsets.getInsets(systemBars()).left,
+                top = initialPadding.top + windowInsets.getInsets(systemBars()).top,
+                right = initialPadding.right + windowInsets.getInsets(systemBars()).right
+            )
         }
 
         binding.results.doOnApplyWindowInsets { insetView, windowInsets, initialPadding, _ ->
@@ -50,7 +55,20 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.fixedContent.doOnApplyWindowInsets { insetView, windowInsets, initialPadding, _ ->
-            insetView.updatePadding(bottom = initialPadding.bottom + windowInsets.getInsets(systemBars()).bottom)
+            insetView.updatePadding(
+                left = initialPadding.left + windowInsets.getInsets(systemBars()).left,
+                right = initialPadding.right + windowInsets.getInsets(systemBars()).right,
+                bottom = initialPadding.bottom + windowInsets.getInsets(systemBars()).bottom
+            )
+        }
+
+        binding.fab.doOnApplyWindowInsets { insetView, windowInsets, _, initialMargins ->
+            insetView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMargins(
+                    left = initialMargins.left + windowInsets.getInsets(systemBars()).left,
+                    right = initialMargins.right + windowInsets.getInsets(systemBars()).right
+                )
+            }
         }
 
         if (Build.VERSION.SDK_INT >= 30) {

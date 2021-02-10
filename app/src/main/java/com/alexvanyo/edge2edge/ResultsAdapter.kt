@@ -2,6 +2,9 @@ package com.alexvanyo.edge2edge
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +29,17 @@ class ResultsAdapter : ListAdapter<String, ResultsAdapter.ResultsViewHolder>(
                 false
             )
         )
+
+        init {
+            binding.resultText.doOnApplyWindowInsets { insetView, windowInsets, _, initialMargins ->
+                insetView.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                    updateMargins(
+                        left = initialMargins.left + windowInsets.getInsets(systemBars()).left,
+                        right = initialMargins.right + windowInsets.getInsets(systemBars()).right
+                    )
+                }
+            }
+        }
 
         fun bind(string: String) {
             binding.resultText.text = string
